@@ -23,7 +23,7 @@ const loginUsuario = async (req, res, next) => {
         status: "error",
         message: "Credenciales incorrectas",
       });
-      next();
+      return next();
     }
 
     let pwd = await bcrypt.compare(password, usuario.password);
@@ -51,7 +51,7 @@ const loginUsuario = async (req, res, next) => {
       token,
     });
 
-    next();
+    return next();
   } catch (error) {
     res.status(500).json({
       status: "error",

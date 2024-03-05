@@ -9,10 +9,12 @@ app.get('/', (req, res) => {
 }) 
 
 const routeUsuarios = require('./routes/usuarios.routes')
+const routeEnlaces = require('./routes/enlaces.routes')
 const routeAuth = require('./routes/auth.routes')
 
 
 app.use('/api/usuarios', routeUsuarios)
+app.use('/api/enlaces', routeEnlaces)
 app.use('/api/auth', routeAuth)
 
 
