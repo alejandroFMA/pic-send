@@ -4,18 +4,17 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-}) 
 
-const routeUsuarios = require('./routes/usuarios.routes')
-const routeEnlaces = require('./routes/enlaces.routes')
-const routeAuth = require('./routes/auth.routes')
+const routeUsuarios = require('./routes/usuarios.routes');
+const routeEnlaces = require('./routes/enlaces.routes');
+const routeArchivos = require('./routes/archivos.routes');
+const routeAuth = require('./routes/auth.routes');
 
 
-app.use('/api/usuarios', routeUsuarios)
-app.use('/api/enlaces', routeEnlaces)
-app.use('/api/auth', routeAuth)
+app.use('/api/usuarios', routeUsuarios);
+app.use('/api/enlaces', routeEnlaces);
+app.use('/api/archivos', routeArchivos);
+app.use('/api/auth', routeAuth);
 
 
 app.listen(port, () => {
