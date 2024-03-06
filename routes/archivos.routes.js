@@ -10,6 +10,7 @@ router.post('/subir',
 verifyToken.getUsuarioAuth,
 archivosController.subirArchivo);
 
+
 router.delete('/borrar/:id', archivosController.borrarArchivo);
 
 module.exports = router

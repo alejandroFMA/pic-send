@@ -55,4 +55,41 @@ const nuevoEnlace = async (req, res, next) => {
   }
 };
 
-module.exports = { nuevoEnlace };
+const obtenerEnlace = async (req, res, next) => {
+  try {
+    const { url } = req.params.url;
+
+    let enlace = await Enlaces.findOne(url);
+
+    if (!enlace) {
+      res.status(404).json({
+        status: "error",
+        message: "Enlace no existe",
+      });
+      return next();
+    }
+
+    res.status(200).json({
+      url: req.params.url,
+      message: "Enlace correcto",
+      archivo: enlace.nombre,
+    });
+
+    const { descargas,nombre } = enlace;
+    if (descargas === 1) {
+      req.archivo = nombre      
+      next()
+    } else {
+      descargas--;
+      await enlace.save();
+    }
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
+  
+
+module.exports = { nuevoEnlace, obtenerEnlace };

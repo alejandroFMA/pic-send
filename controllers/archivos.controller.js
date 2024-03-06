@@ -1,5 +1,7 @@
 const multer = require('multer');
 const { nanoid } = require("nanoid");
+const Enlaces = require('../models/enlaces.model')
+const fs = require('fs');
 
 const subirArchivo = async (req, res, next) => {
     const configuracionMulter = {
@@ -31,20 +33,13 @@ const subirArchivo = async (req, res, next) => {
 };
 
 
+
 const borrarArchivo = async (req, res) => {
   try {
-    let id = req.params.id;
-
-    return res.status(201).json({
-      status: "success",
-      message: "Archivo borrado",
-    });
+fs.unlinkSync(__dirname + '/../uploads/' + req.archivo)
+  console.log("Archivo borrado") 
   } catch (error) {
-    return res.status(500).json({
-      status: "error",
-      message: "Error borrando archivo",
-      error: error.message,
-    });
+    console.log(error)
   }
 };
 
