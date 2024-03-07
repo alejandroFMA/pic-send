@@ -71,16 +71,16 @@ const obtenerEnlace = async (req, res, next) => {
 
     res.status(200).json({
       url: req.params.url,
-      message: "Enlace correcto",
-      archivo: enlace.nombre,
+      message: "Enlace correcto"
     });
 
     const { descargas,nombre } = enlace;
     if (descargas === 1) {
-      req.archivo = nombre      
-      next()
+      req.archivo = nombre  
+      await Enlaces.findOneAndDelete(url)   
+      return next()
     } else {
-      descargas--;
+      enlace.descargas--;
       await enlace.save();
     }
   } catch (error) {

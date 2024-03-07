@@ -33,7 +33,6 @@ const subirArchivo = async (req, res, next) => {
 };
 
 
-
 const borrarArchivo = async (req, res) => {
   try {
 fs.unlinkSync(__dirname + '/../uploads/' + req.archivo)
